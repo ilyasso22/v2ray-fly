@@ -1,0 +1,22 @@
+app = "v2ray-iam-free"
+kill_signal = "SIGINT"
+kill_timeout = 5
+processes = []
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "80"
+
+[[services]]
+  internal_port = 80
+  protocol = "tcp"
+
+  [[services.ports]]
+    handlers = ["tls"]
+    port = 443
+
+  [[services.tls_options]]
+    alpn = ["http/1.1"]
+    versions = ["TLSv1.2", "TLSv1.3"]
